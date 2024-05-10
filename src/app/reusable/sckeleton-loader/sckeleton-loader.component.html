@@ -1,0 +1,10 @@
+<div class="border w-full grid grid-cols-12 p-5 gap-8 max-sm:gap-2">
+  <div
+    [ngClass]="mainClass"
+    class="cursor-pointer rounded-md col-span-4 h-[200px] max-sm:h-[150px] flex flex-col gap-4 items-center justify-center py-4 bg-black bg-opacity-30"
+    *ngFor="let loading of sckeletonLoadArry"
+  >
+    <div [class]="loading.className_1"></div>
+    <div [class]="loading.className_2"></div>
+  </div>
+</div>

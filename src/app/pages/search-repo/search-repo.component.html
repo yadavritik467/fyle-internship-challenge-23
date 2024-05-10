@@ -1,0 +1,245 @@
+<section
+  class="w-full flex justify-center items-center bg-[#FFDAB9] px-4 max-[900px]:py-4 overflow-x-hidden h-[100vh]"
+>
+  <div
+    class="w-full h-[90vh] flex max-[900px]:flex-col items-start justify-between gap-4"
+  >
+    <div
+      [ngClass]="userLoading ? 'bg-black bg-opacity-20' : 'bg-white'"
+      class="w-[400px] max-xl:w-[350px] max-[900px]:w-full py-4 flex flex-col relative gap-4 justify-center h-fit max-[900px]:h-fit rounded-md border"
+    >
+      <p class="text-black absolute top-4 left-4 text-[22px]">About</p>
+
+      <!-- if the userLoading is true -->
+
+      <ng-container *ngIf="userLoading">
+        <div
+          class="w-[400px] max-xl:w-[350px] max-[900px]:w-full max-[900px]:h-fit p-5"
+        >
+          <div class="flex flex-col items-center-center">
+            <div
+              class="w-[200px] h-[200px] mb-2 mx-auto rounded-full animate-shimmer"
+            ></div>
+            <div
+              class="w-[100px] h-[15px] mb-5 1 mx-auto rounded-[8px] animate-shimmer"
+            ></div>
+          </div>
+
+          <div
+            class="w-[90%] h-[15px] mb-3 rounded-[8px] animate-shimmer"
+          ></div>
+          <div
+            class="w-[100%] h-[15px] mb-3 rounded-[8px] animate-shimmer"
+          ></div>
+          <div
+            class="w-[80%] h-[15px] mb-3 rounded-[8px] animate-shimmer"
+          ></div>
+
+          <div class="mt-5 flex justify-between">
+            <div
+              class="w-[40px] h-[15px] mb-3 rounded-[8px] animate-shimmer"
+            ></div>
+            <div
+              class="w-[40px] h-[15px] mb-3 rounded-[8px] animate-shimmer"
+            ></div>
+          </div>
+
+          <div class="mt-5">
+            <div
+              class="w-[100%] h-[15px] mb-3 rounded-[8px] animate-shimmer"
+            ></div>
+            <div
+              class="w-[100%] h-[15px] mb-3 rounded-[8px] animate-shimmer"
+            ></div>
+            <div
+              class="w-[100%] h-[15px] mb-3 rounded-[8px] animate-shimmer"
+            ></div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="user && !userLoading">
+        <div class="mx-auto pt-10">
+          <img
+            [src]="user.avatar_url"
+            class="w-[200px] h-[200px] object-contain rounded-full"
+            [alt]="user.avatar_url"
+          />
+        </div>
+        <div>
+          <p class="text-center">{{ user.name }}</p>
+        </div>
+        <div>
+          <p class="text-center px-4">{{ user.bio || "Github user" }}</p>
+        </div>
+        <div class="flex flex-wrap justify-between items-center gap-4 px-2">
+          <div class="flex gap-2 items-center">
+            <p>Followers :</p>
+            <p>{{ user.followers }}</p>
+          </div>
+          <div class="flex gap-2 items-center">
+            <p>Public Repo :</p>
+            <p>{{ user.public_repos }}</p>
+          </div>
+        </div>
+
+        <!-- border -->
+        <div class="border w-[90%] mx-2"></div>
+
+        <div
+          class="flex flex-wrap min-[900px]:flex-col px-5 min-[900px]:justify-start justify-between gap-4"
+        >
+          <div class="flex gap-4 justify-start items-center">
+            <div>
+              <mat-icon color="primary">folder</mat-icon>
+            </div>
+            <div>
+              <p class="opacity-70 text-[15px]">GitHub Url</p>
+              <a
+                class="text-blue-500 text-[15px]"
+                [href]="user.html_url"
+                target="_blank"
+                >@{{ user.login }}</a
+              >
+            </div>
+          </div>
+          <div class="flex gap-4 justify-start items-center">
+            <div>
+              <mat-icon color="primary">email</mat-icon>
+            </div>
+            <div>
+              <p class="opacity-70 text-[15px]">Email</p>
+              <p class="text-[15px]">Na</p>
+            </div>
+          </div>
+          <div class="flex gap-4 justify-start items-center">
+            <div>
+              <mat-icon color="primary">location_on</mat-icon>
+            </div>
+            <div>
+              <p class="opacity-70 text-[15px]">Location</p>
+              <p class="text-[15px]">{{ user.location | titlecase }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="w-full h-fit rounded-md bg-white border">
+      <div class="p-4 grid grid-cols-12 gap-2">
+        <p class="col-span-6 max-sm:col-span-12 text-black text-lg">
+          Repositories
+        </p>
+        <div
+          class="col-span-6 max-sm:col-span-12 flex gap-2 justify-end items-start"
+        >
+          <div>
+            <mat-form-field
+              class="w-[300px] max-sm:w-[200px] bg-white"
+              appearance="outline"
+            >
+              <mat-label>Search Repositories</mat-label>
+              <input
+                matInput
+                [(ngModel)]="repoName"
+                placeholder="Search repo . ."
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <button
+              (click)="searchRepo()"
+              mat-flat-button
+              class="matBtn"
+              color="primary"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- show all the repositories -->
+      <ng-container *ngIf="repos.length && !repoLoading">
+        <div class="grid grid-cols-12 min-h-[550px] bg-white p-5 gap-4">
+          <a
+            [href]="repo.html_url"
+            target="_blank"
+            *ngFor="let repo of repos"
+            class="hover:bg-black hover:bg-opacity-20 border-[2px] cursor-pointer rounded-md col-span-4 max-xl:col-span-6 max-[900px]:col-span-12 min-h-[100px] flex flex-col gap-4 items-start justify-start p-4"
+          >
+            <p>{{ repo.name }}</p>
+            <p class="text-[15px] text-justify opacity-50">
+              {{ repo.description || "Github Repo" | slice : 0 : 100 }}
+              {{ repo.description ? "..." : "" }}
+            </p>
+          </a>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!repos.length && !repoLoading">
+        <div
+          class="w-full bg-white min-h-[550px] flex justify-center items-center"
+        >
+          <p>No repo found ..</p>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="repoLoading">
+        <div class="min-h-[550px] bg-white">
+          <app-sckeleton-loader
+            [mainClass]="'max-xl:col-span-6 max-[900px]:col-span-12'"
+            [className_1]="'w-full xm:w-[50%] lg:w-[33%]'"
+            [className_2]="
+              'w-[95%] h-[80px] mx-auto  rounded-full animate-shimmer'
+            "
+          ></app-sckeleton-loader>
+        </div>
+      </ng-container>
+
+      <!-- pagination here -->
+      <div
+        class="w-full p-4 bg-white flex max-sm:flex-col gap-4 justify-between items-center"
+      >
+        <div class="flex justify-between items-center min-w-[300px] h-fit">
+          <button (click)="prevPage()" mat-icon-button color="primary">
+            <mat-icon color="primary">chevron_left</mat-icon>
+          </button>
+          <div class="flex gap-4">
+            <div *ngFor="let paginate of paginatedPageIndex">
+              <div
+                (click)="navigetToPage(paginate)"
+                [ngClass]="
+                  paginate === page
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-white text-black'
+                "
+                class="cursor-pointer w-10 h-10 flex justify-center items-center rounded-full"
+              >
+                {{ paginate }}
+              </div>
+            </div>
+          </div>
+          <button
+            
+            (click)="nextPage()"
+            mat-icon-button
+            color="primary"
+          >
+            <mat-icon color="primary">chevron_right</mat-icon>
+          </button>
+        </div>
+        <div class="bg-transparent h-fit">
+          <mat-form-field appearance="outline">
+            <mat-label>Per Page Repos</mat-label>
+            <mat-select
+              [value]="perPage"
+              (selectionChange)="onSelectPerPage($event)"
+            >
+              <mat-option *ngFor="let opt of pageOpt" [value]="opt">
+                {{ opt }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

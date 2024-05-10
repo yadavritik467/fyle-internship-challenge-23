@@ -1,0 +1,116 @@
+<div class="w-full h-[120vh]">
+  <div class="flex gap-2 justify-center items-start py-10">
+    <div>
+      <mat-form-field
+        class="w-[300px] max-sm:w-[200px] bg-white"
+        appearance="outline"
+      >
+        <mat-label>Search user</mat-label>
+        <input matInput [(ngModel)]="userName" placeholder="Search user . ." />
+      </mat-form-field>
+    </div>
+    <div>
+      <button
+        (click)="searchUser()"
+        mat-flat-button
+        class="matBtn"
+        color="primary"
+      >
+        Search
+      </button>
+    </div>
+  </div>
+
+  <div class="p-8 min-h-[570px] bg-[#FFDAB9]">
+    <ng-container *ngIf="users?.length && !isLoading">
+      <div class="w-full grid grid-cols-12 gap-8 max-sm:gap-2">
+        <div
+          (click)="navigateToPage(user)"
+          class="border cursor-pointer rounded-md col-span-4 max-[900px]:col-span-6 max-sm:col-span-12 flex flex-col gap-4 items-center justify-center py-4 bg-white"
+          *ngFor="let user of users"
+        >
+          <div>
+            <img
+              [src]="user.avatar_url"
+              class="object-cover w-[150px] h-[150px] rounded-full"
+              alt=""
+            />
+          </div>
+          <div>
+            <p>Name : {{ user.login }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!-- if the loading is true -->
+    <ng-container *ngIf="isLoading">
+      <app-sckeleton-loader
+        [mainClass]="'max-[900px]:col-span-6 max-sm:col-span-12'"
+        [className_1]="
+          'w-[150px] h-[150px]  mx-auto  rounded-full animate-shimmer'
+        "
+        [className_2]="
+          'w-[150px] h-[20px]  mx-auto  rounded-[12px] animate-shimmer'
+        "
+      ></app-sckeleton-loader>
+    </ng-container>
+
+    <!-- if the user array's length is 0 -->
+    <ng-container *ngIf="users?.length === 0 && !isLoading">
+      <div
+        class="border w-full flex justify-center items-center p-8 h-[570px] bg-[#FFDAB9]"
+      >
+        <p class="text-center border w-full text-black">
+          No user data found . .
+        </p>
+      </div>
+    </ng-container>
+  </div>
+  <!-- pagination -->
+
+  <div
+    class="w-full p-4 bg-white flex max-sm:flex-col gap-4 justify-between items-center"
+  >
+    <div class="flex justify-between items-center min-w-[300px] h-fit">
+      <button (click)="prevPage()" mat-icon-button color="primary">
+        <mat-icon color="primary">chevron_left</mat-icon>
+      </button>
+      <div class="flex gap-4">
+        <div *ngFor="let paginate of paginatedPageIndex">
+          <div
+            (click)="navigetToPageThroughPaginate(paginate)"
+            [ngClass]="
+              paginate === page
+                ? 'bg-blue-500 text-white'
+                : 'bg-white text-black'
+            "
+            class="cursor-pointer w-10 h-10 flex justify-center items-center rounded-full"
+          >
+            {{ paginate }}
+          </div>
+        </div>
+      </div>
+      <button
+        [disabled]="users.length === 0"
+        (click)="nextPage()"
+        mat-icon-button
+        color="primary"
+      >
+        <mat-icon color="primary">chevron_right</mat-icon>
+      </button>
+    </div>
+    <div class="bg-transparent h-fit">
+      <mat-form-field appearance="outline">
+        <mat-label>Per Page Users</mat-label>
+        <mat-select
+          [value]="perPage"
+          (selectionChange)="onSelectPerPage($event)"
+        >
+          <mat-option *ngFor="let opt of pageOpt" [value]="opt">
+            {{ opt }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap");
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "ngx-toastr/toastr";
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: white;
+}
+
+.matBtn {
+  height: 55px !important;
+}
+
+// This line of css is required for working with Tailwind css with angular material
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}
+
+.animate-shimmer {
+  animation: shimmer 1.2s infinite linear;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.7)
+  );
+  background-size: 200px 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100px 0;
+  }
+
+  100% {
+    background-position: 100px 0;
+  }
+}
