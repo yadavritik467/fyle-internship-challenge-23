@@ -22,7 +22,7 @@ export class SearchRepoComponent implements OnInit, OnDestroy {
     className_1: string;
     className_2: string;
   }> = [];
-  userName: string = this.activatedRoute.snapshot.queryParams['userName'];
+  userName: string = '';
   repoName: string = '';
   perPage: number = 10;
   page: number = 1;
@@ -38,6 +38,7 @@ export class SearchRepoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.userName = this.activatedRoute.snapshot.queryParams['userName'];
     this.getUser();
     this.getRepos();
   }
