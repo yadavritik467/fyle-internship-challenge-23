@@ -6,7 +6,7 @@
     "start": "ng serve",
     "generate-env-prod": "echo export const environment = { github_token: process.env['GITHUB_TOKEN'] }; > src/environments/environment.prod.ts",
     "build": "ng build",
-    "prod:build": "npm run generate-env-prod && ng build",
+    "prod:build": "npm run generate-env-prod && node generate-env.js &&  ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
