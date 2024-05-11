@@ -1,16 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ReduntantApiCallInterceptor } from './reduntant-api-call.interceptor';
+import { RedundantAPICallInterceptor } from './reduntant-api-call.interceptor';
 
-describe('ReduntantApiCallInterceptor', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      ReduntantApiCallInterceptor
-      ]
-  }));
+describe('RedundantAPICallInterceptor', () => {
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [RedundantAPICallInterceptor],
+    })
+  );
 
   it('should be created', () => {
-    const interceptor: ReduntantApiCallInterceptor = TestBed.inject(ReduntantApiCallInterceptor);
+    const interceptor: RedundantAPICallInterceptor = TestBed.inject(
+      RedundantAPICallInterceptor
+    );
     expect(interceptor).toBeTruthy();
   });
 });

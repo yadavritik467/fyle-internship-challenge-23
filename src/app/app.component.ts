@@ -6,9 +6,4 @@ import { ApiService } from './services/api/api.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  // constructor(private apiService: ApiService) {}
-  // ngOnInit() {
-  //   this.apiService.getUser('yadavritik467').subscribe(console.log);
-  // }
-}
+export class AppComponent {}

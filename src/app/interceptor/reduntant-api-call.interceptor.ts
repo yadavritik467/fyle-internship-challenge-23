@@ -8,7 +8,6 @@ import {
 import { Observable, of, tap } from 'rxjs';
 
 @Injectable()
-@Injectable()
 export class RedundantAPICallInterceptor implements HttpInterceptor {
   private cache = new Map<string, Observable<any>>();
 
