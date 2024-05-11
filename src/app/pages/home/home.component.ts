@@ -86,11 +86,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         const totalPage = pageValue > 5 ? breakIndex : pageValue;
         let tempIndexArr = [];
         this.paginatedPageIndex = [];
-        console.log(this.paginatedIndexValue, breakIndex, totalPage);
         for (let i = this.page; i >= totalPage; i--) {
           tempIndexArr.push(i);
         }
-        this.paginatedPageIndex = tempIndexArr.sort((a, b) => a - b);
+        this.paginatedPageIndex = tempIndexArr.sort((a, b) => a - b); // for setting the index in asscending order
         tempIndexArr = [];
       }
       this.searchUser();
