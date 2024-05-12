@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               );
               if (!this.createPaginationCalled) {
                 this.createPagination();
-                this.createPaginationCalled = true; // Set the flag to true after first call
+                this.createPaginationCalled = true; // for not creating the pagination on 2nd time call
               }
               this.isLoading = false;
             }
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   createPagination() {
-    if (this.totalLength) {
+    if (this.users.length && this.totalLength) {
       const pageValue = Math.ceil(this.totalLength / this.perPage);
       const breakIndex =
         this.paginatedIndexValue > 5
@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   nextPage() {
-    if (this.totalLength) {
+    if (this.users.length && this.totalLength) {
       this.page++;
       if (this.page > this.paginatedPageIndex[4]) {
         this.paginatedIndexValue =

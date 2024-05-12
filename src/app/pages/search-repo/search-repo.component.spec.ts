@@ -46,12 +46,6 @@ describe('SearchRepoComponent', () => {
     apiService = TestBed.inject(ApiService) as jasmine.SpyObj<ApiService>;
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SearchRepoComponent);
-    component = fixture.componentInstance;
-    activatedRoute = TestBed.inject(ActivatedRoute);
-  });
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
