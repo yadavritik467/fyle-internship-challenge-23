@@ -18,7 +18,7 @@ import {
   providedIn: 'root',
 })
 export class ApiService {
-  userName: string = 'ritik';
+  userName: string = 'yadavritik';
   perPage: number = 10;
   page: number = 1;
   headers = new HttpHeaders({

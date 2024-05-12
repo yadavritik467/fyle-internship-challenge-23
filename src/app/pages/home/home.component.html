@@ -11,7 +11,7 @@
     </div>
     <div>
       <button
-        (click)="searchUser()"
+        (click)="page = 1; createPaginationCalled=false;searchUser();"
         mat-flat-button
         class="matBtn"
         color="primary"
@@ -58,11 +58,9 @@
     <!-- if the user array's length is 0 -->
     <ng-container *ngIf="users?.length === 0 && !isLoading">
       <div
-        class="border w-full flex justify-center items-center p-8 h-[570px] bg-[#FFDAB9]"
+        class="w-full flex justify-center items-center p-8 h-[570px] bg-[#FFDAB9]"
       >
-        <p class="text-center border w-full text-black">
-          No user data found . .
-        </p>
+        <p class="text-center w-full text-black">No user data found . .</p>
       </div>
     </ng-container>
   </div>

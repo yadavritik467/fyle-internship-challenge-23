@@ -147,7 +147,7 @@
           </div>
           <div>
             <button
-              (click)="searchRepo()"
+              (click)="page = 1; searchRepo()"
               mat-flat-button
               class="matBtn"
               color="primary"
@@ -165,7 +165,7 @@
             [href]="repo.html_url"
             target="_blank"
             *ngFor="let repo of repos"
-            class="hover:bg-black hover:bg-opacity-20 border-[2px] cursor-pointer rounded-md col-span-4 max-xl:col-span-6 max-[900px]:col-span-12 min-h-[100px] flex flex-col gap-4 items-start justify-start p-4"
+            class="hover:bg-black hover:bg-opacity-20 border-[2px] cursor-pointer rounded-md col-span-4 max-xl:col-span-6 max-[900px]:col-span-12 h-[150px] flex flex-col gap-4 items-start justify-start p-4"
           >
             <p>{{ repo.name }}</p>
             <p class="text-[15px] text-justify opacity-50">
@@ -217,12 +217,7 @@
               </div>
             </div>
           </div>
-          <button
-            
-            (click)="nextPage()"
-            mat-icon-button
-            color="primary"
-          >
+          <button (click)="nextPage()" mat-icon-button color="primary">
             <mat-icon color="primary">chevron_right</mat-icon>
           </button>
         </div>
